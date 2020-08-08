@@ -8,6 +8,8 @@ public class CrabMovementScript : MonoBehaviour
     public float _jumpForce;
     public CrabJumpStatus _crabJumpStatus;
 
+    public Vector3 _originalPosition;
+
     private Rigidbody _rigidbody;
 
     void Awake()
@@ -27,7 +29,7 @@ public class CrabMovementScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         float movement = _movementDirection * Time.deltaTime;
         transform.position += new Vector3(movement, 0, 0);
@@ -75,6 +77,13 @@ public class CrabMovementScript : MonoBehaviour
         {
             _movementDirection = -_movementDirection;
         }
+    }
+
+    public void PlaceInOriginalPosition()
+    {
+        Transform currTransform = GetComponent<Transform>();
+        currTransform.localPosition= _originalPosition;
+        transform.localPosition = _originalPosition;
     }
 
     public enum CrabJumpStatus

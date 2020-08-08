@@ -39,18 +39,32 @@ public class EnemyScript : MonoBehaviour
 
         if(collectableAction != null)
         {
-            DetermineDestiny(collectableAction);
+            DetermineDestiny(player, collectableAction);
         }
     }
 
-    private void DetermineDestiny(CollectableActionScript collectableAction)
+    private void DetermineDestiny(GameObject player, CollectableActionScript collectableAction)
     {
         if(collectableAction.CurrentCrabStatus == CollectableActionScript.CrabStatus.Invincible)
         {
             DestroyEnemy();
         }
+        else
+        {
+            ShowCutscene();
+            //TODO: Display cutscene, then place crab back at original point
+            CrabMovementScript script = player.GetComponent<CrabMovementScript>();
+            if(script != null)
+            {
+                script.PlaceInOriginalPosition();
+            }
 
-        // TODO: Disable enemy or game over?
+        }
+    }
+
+    private void ShowCutscene()
+    {
+        // TODO: Show cutscene here
     }
 
     private void DestroyEnemy()
