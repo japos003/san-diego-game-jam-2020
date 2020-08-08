@@ -81,8 +81,6 @@ public class CrabMovementScript : MonoBehaviour
 
     public void PlaceInOriginalPosition()
     {
-        Transform currTransform = GetComponent<Transform>();
-        currTransform.localPosition= _originalPosition;
         transform.localPosition = _originalPosition;
     }
 
