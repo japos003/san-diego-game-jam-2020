@@ -36,4 +36,13 @@ public class CrabMovementScript : MonoBehaviour
               _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
         }
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Wall")
+        {
+            _movementDirection = -_movementDirection;
+            _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+        }
+    }
 }
