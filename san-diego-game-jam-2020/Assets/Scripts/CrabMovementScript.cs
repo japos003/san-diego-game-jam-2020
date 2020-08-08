@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrabMovementScript.cs : MonoBehaviour
+public class CrabMovementScript : MonoBehaviour
 {
     void Awake()
     {
