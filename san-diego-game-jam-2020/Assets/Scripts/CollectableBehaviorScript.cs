@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class CollectableBehaviorScript : MonoBehaviour
 {
+    public CollectableType CurrentCollectableType;
+
     private Rigidbody _rigidbody;
     private Renderer _renderer;
+    
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
@@ -31,6 +34,23 @@ public class CollectableBehaviorScript : MonoBehaviour
             _renderer.enabled = false;
             _rigidbody.detectCollisions = false;
             _rigidbody.isKinematic = false;
+
+            CollectableActionScript collectableAction = collision.gameObject.GetComponent<CollectableActionScript>();
+            AddToPlayer(collectableAction);
         }
+    }
+
+    private void AddToPlayer(CollectableActionScript collectableAction)
+    {
+        if(collectableAction != null)
+        {
+            collectableAction._collectedTypes.Add(CurrentCollectableType);
+        }
+    }
+
+    public enum CollectableType
+    {
+        Weapon,
+        Jam
     }
 }

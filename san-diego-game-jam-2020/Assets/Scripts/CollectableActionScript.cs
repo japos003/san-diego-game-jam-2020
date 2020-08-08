@@ -8,11 +8,14 @@ public class CollectableActionScript : MonoBehaviour
     public float _currentTime;
     
     public CrabStatus CurrentCrabStatus;
+    public bool IsCarryingKey;
+    public List<CollectableBehaviorScript.CollectableType> _collectedTypes;
 
     private Rigidbody _rigidbody;
     void Awake()
     {
         _rigidbody = GetComponent<Rigidbody>();
+        _collectedTypes = new List<CollectableBehaviorScript.CollectableType>();
     }
 
     // Start is called before the first frame update
@@ -39,8 +42,26 @@ public class CollectableActionScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Collectable")
         {
-            CurrentCrabStatus = CrabStatus.Invincible;
-            _currentTime = _timeLimit;
+            CheckCollisionType(collision);
+        }
+    }
+
+    private void CheckCollisionType(Collision collision)
+    {
+        CollectableBehaviorScript collidedBehavior = collision.gameObject.GetComponent<CollectableBehaviorScript>();
+
+        if(collidedBehavior != null)
+        {
+            switch (collidedBehavior.CurrentCollectableType)
+            {
+                case CollectableBehaviorScript.CollectableType.Weapon:
+                    CurrentCrabStatus = CrabStatus.Invincible;
+                    _currentTime = _timeLimit;
+                    break;
+                case CollectableBehaviorScript.CollectableType.Jam:
+                    IsCarryingKey = true;
+                    break;
+            }
         }
     }
 

@@ -55,6 +55,26 @@ public class CrabMovementScript : MonoBehaviour
         {
             _crabJumpStatus = CrabJumpStatus.Floor;
         }
+
+        if(collision.gameObject.tag == "Goal")
+        {
+            DetermineIfGoalReached(collision.gameObject);
+        }
+    }
+
+    public void DetermineIfGoalReached(GameObject gameObject)
+    {
+        CollectableActionScript actionScript = GetComponent<CollectableActionScript>();
+
+        if(actionScript != null && actionScript.IsCarryingKey)
+        {
+            // TODO: Go to next scene?
+            print("Goal Reached!");
+        }
+        else
+        {
+            _movementDirection = -_movementDirection;
+        }
     }
 
     public enum CrabJumpStatus
