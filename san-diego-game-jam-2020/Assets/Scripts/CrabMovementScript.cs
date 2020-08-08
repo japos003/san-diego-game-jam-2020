@@ -6,6 +6,7 @@ public class CrabMovementScript : MonoBehaviour
 {
     public float _movementDirection;
     public float _jumpForce;
+    public CrabJumpStatus _crabJumpStatus;
 
     private Rigidbody _rigidbody;
 
@@ -34,6 +35,7 @@ public class CrabMovementScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
               _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+              _crabJumpStatus = CrabJumpStatus.Jump;
         }
     }
 
@@ -42,7 +44,22 @@ public class CrabMovementScript : MonoBehaviour
         if(collision.gameObject.tag == "Wall")
         {
             _movementDirection = -_movementDirection;
-            _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+
+            if(_crabJumpStatus == CrabJumpStatus.Jump)
+            {
+                _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+            }
         }
+
+        if (collision.gameObject.tag == "Floor")
+        {
+            _crabJumpStatus = CrabJumpStatus.Floor;
+        }
+    }
+
+    public enum CrabJumpStatus
+    {
+        Floor,
+        Jump
     }
 }

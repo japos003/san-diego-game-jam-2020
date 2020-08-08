@@ -345,6 +345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _movementDirection: 3
   _jumpForce: 350
+  _crabJumpStatus: 0
 --- !u!65 &357582869
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -452,7 +453,7 @@ GameObject:
   - component: {fileID: 647154031}
   m_Layer: 0
   m_Name: Floating_Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -871,7 +872,7 @@ GameObject:
   - component: {fileID: 1943543620}
   m_Layer: 0
   m_Name: Bottom_Floor
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -983,7 +984,7 @@ GameObject:
   - component: {fileID: 2075167561}
   m_Layer: 0
   m_Name: Second_Floor_Left
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
