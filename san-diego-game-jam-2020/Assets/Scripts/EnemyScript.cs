@@ -47,7 +47,7 @@ public class EnemyScript : MonoBehaviour
     {
         if(collectableAction.CurrentCrabStatus == CollectableActionScript.CrabStatus.Invincible)
         {
-            DestroyEnemy();
+            DestroyEnemy(player);
         }
         else
         {
@@ -67,10 +67,16 @@ public class EnemyScript : MonoBehaviour
         // TODO: Show cutscene here
     }
 
-    private void DestroyEnemy()
+    private void DestroyEnemy(GameObject player)
     {
         _renderer.enabled = false;
         _rigidbody.isKinematic = false;
         _rigidbody.detectCollisions = false;
+
+        CollectableActionScript action = player.GetComponent<CollectableActionScript>();
+        action._collectedTypes.Add(CollectableBehaviorScript.CollectableType.Jam);
+        action.IsCarryingKey = true;
+
+
     }
 }
