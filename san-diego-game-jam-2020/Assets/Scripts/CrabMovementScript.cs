@@ -6,11 +6,13 @@ public class CrabMovementScript : MonoBehaviour
 {
     public float _movementDirection;
     public float _jumpForce;
+    public float _animationTime;
     public CrabJumpStatus _crabJumpStatus;
 
     public Vector3 _originalPosition;
 
     private Rigidbody _rigidbody;
+    private float _pausedSeconds;
 
     void Awake()
     {
@@ -31,14 +33,34 @@ public class CrabMovementScript : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(_pausedSeconds >= 0.0f)
+        {
+            _pausedSeconds -= Time.deltaTime;
+        }
+        else
+        {
+            _pausedSeconds = 0;
+            MoveCrab();
+        }
+
+
+    }
+
+    private void MoveCrab()
+    {
         float movement = _movementDirection * Time.deltaTime;
         transform.position += new Vector3(movement, 0, 0);
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-              _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
-              _crabJumpStatus = CrabJumpStatus.Jump;
+            _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+            _crabJumpStatus = CrabJumpStatus.Jump;
         }
+    }
+
+    public void PauseMovementDuringSecond(float seconds)
+    {
+        _pausedSeconds = seconds;
     }
 
     private void OnCollisionEnter(Collision collision)

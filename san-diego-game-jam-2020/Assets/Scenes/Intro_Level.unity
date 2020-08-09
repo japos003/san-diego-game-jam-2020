@@ -345,7 +345,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movementDirection: 3
-  _jumpForce: 170
+  _jumpForce: 200
+  _animationTime: 5
   _crabJumpStatus: 0
   _originalPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &357582869
@@ -1224,6 +1225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _jarIcon: {fileID: 1443884563}
+  _animationTime: 5
 --- !u!1 &1721182981
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyScript : MonoBehaviour
 {
     public GameObject _jarIcon;
+    public float _animationTime;
 
     private Rigidbody _rigidbody;
     private Renderer _renderer;
@@ -71,15 +72,26 @@ public class EnemyScript : MonoBehaviour
 
     private void DestroyEnemy(GameObject player)
     {
-        _renderer.enabled = false;
         _rigidbody.isKinematic = false;
         _rigidbody.detectCollisions = false;
 
         CollectableActionScript action = player.GetComponent<CollectableActionScript>();
         action._collectedTypes.Add(CollectableBehaviorScript.CollectableType.Jam);
         action.IsCarryingKey = true;
+
+        CrabMovementScript movementScript = player.GetComponent<CrabMovementScript>();
+        movementScript.PauseMovementDuringSecond(_animationTime);
+
+        StartCoroutine(ExecuteAnimation());
+
         _jarIcon.SetActive(true);
+    }
 
+    private IEnumerator ExecuteAnimation()
+    {
+        // TODO: Implement Animation event here.
 
+        yield return new WaitForSeconds(_animationTime);
+        _renderer.enabled = false;
     }
 }
