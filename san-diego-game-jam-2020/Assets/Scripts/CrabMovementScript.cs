@@ -31,7 +31,7 @@ public class CrabMovementScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if(_pausedSeconds >= 0.0f)
         {
@@ -51,9 +51,9 @@ public class CrabMovementScript : MonoBehaviour
         float movement = _movementDirection * Time.deltaTime;
         transform.position += new Vector3(movement, 0, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _crabJumpStatus == CrabJumpStatus.Floor)
         {
-            _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+            _rigidbody.velocity += new Vector3(0, _jumpForce, 0);
             _crabJumpStatus = CrabJumpStatus.Jump;
         }
     }
@@ -71,7 +71,8 @@ public class CrabMovementScript : MonoBehaviour
 
             if(_crabJumpStatus == CrabJumpStatus.Jump)
             {
-                _rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+                //_rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
+                _rigidbody.velocity += new Vector3(0, _jumpForce, 0);
             }
         }
 
