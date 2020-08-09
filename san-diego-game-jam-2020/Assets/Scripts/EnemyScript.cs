@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    public GameObject _jarIcon;
+
     private Rigidbody _rigidbody;
     private Renderer _renderer;
 
@@ -76,6 +78,7 @@ public class EnemyScript : MonoBehaviour
         CollectableActionScript action = player.GetComponent<CollectableActionScript>();
         action._collectedTypes.Add(CollectableBehaviorScript.CollectableType.Jam);
         action.IsCarryingKey = true;
+        _jarIcon.SetActive(true);
 
 
     }
