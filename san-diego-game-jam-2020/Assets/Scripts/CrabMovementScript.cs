@@ -31,7 +31,7 @@ public class CrabMovementScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if(_pausedSeconds >= 0.0f)
         {
@@ -42,8 +42,6 @@ public class CrabMovementScript : MonoBehaviour
             _pausedSeconds = 0;
             MoveCrab();
         }
-
-
     }
 
     private void MoveCrab()
@@ -71,7 +69,6 @@ public class CrabMovementScript : MonoBehaviour
 
             if(_crabJumpStatus == CrabJumpStatus.Jump)
             {
-                //_rigidbody.AddForce(new Vector3(0, _jumpForce, 0));
                 _rigidbody.velocity += new Vector3(0, _jumpForce, 0);
             }
         }
