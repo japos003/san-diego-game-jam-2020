@@ -9,10 +9,14 @@ public class CrabMovementScript : MonoBehaviour
     public float _animationTime;
     public CrabJumpStatus _crabJumpStatus;
 
+    public float _coolOffTime;
+    public bool IsControllable;
+
     public Vector3 _originalPosition;
 
     private Rigidbody _rigidbody;
     private float _pausedSeconds;
+    private float _currentCoolOffTime;
 
     void Awake()
     {
@@ -26,7 +30,7 @@ public class CrabMovementScript : MonoBehaviour
         {
             _movementDirection = 1.0f;
         }
-
+        _currentCoolOffTime = _coolOffTime;
         if (_jumpForce == 0f) { _jumpForce = 250f; }
     }
 
@@ -36,6 +40,10 @@ public class CrabMovementScript : MonoBehaviour
         if(_pausedSeconds >= 0.0f)
         {
             _pausedSeconds -= Time.deltaTime;
+        }
+        else if(_currentCoolOffTime >= 0.0f)
+        {
+            _currentCoolOffTime -= Time.deltaTime;
         }
         else
         {
@@ -49,11 +57,11 @@ public class CrabMovementScript : MonoBehaviour
         float movement = _movementDirection * Time.deltaTime;
         transform.position += new Vector3(movement, 0, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space) && _crabJumpStatus == CrabJumpStatus.Floor)
+        if ((Input.GetKeyDown(KeyCode.Space) || Input.GetButton("Jump")) && _crabJumpStatus == CrabJumpStatus.Floor)
         {
             _rigidbody.velocity += new Vector3(0, _jumpForce, 0);
             _crabJumpStatus = CrabJumpStatus.Jump;
-        }
+        } 
     }
 
     public void PauseMovementDuringSecond(float seconds)
@@ -102,6 +110,7 @@ public class CrabMovementScript : MonoBehaviour
     public void PlaceInOriginalPosition()
     {
         transform.localPosition = _originalPosition;
+        _currentCoolOffTime = _coolOffTime;
     }
 
     public enum CrabJumpStatus

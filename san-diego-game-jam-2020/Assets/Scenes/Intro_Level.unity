@@ -447,6 +447,8 @@ MonoBehaviour:
   _jumpForce: 12
   _animationTime: 5
   _crabJumpStatus: 1
+  _coolOffTime: 1
+  IsControllable: 0
   _originalPosition: {x: 0, y: 0, z: 0}
 --- !u!65 &357582869
 BoxCollider:
@@ -459,8 +461,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.10796, y: 1.0685824, z: 1}
-  m_Center: {x: 0.00000011920929, y: -0.13550362, z: 0}
+  m_Size: {x: 1.1602229, y: 1.0685824, z: 1}
+  m_Center: {x: -0.005226235, y: -0.13550362, z: 0}
 --- !u!23 &357582870
 MeshRenderer:
   m_ObjectHideFlags: 0
