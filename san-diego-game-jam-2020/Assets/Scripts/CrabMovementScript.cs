@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CrabMovementScript : MonoBehaviour
 {
@@ -99,12 +100,24 @@ public class CrabMovementScript : MonoBehaviour
         if(actionScript != null && actionScript.IsCarryingKey)
         {
             // TODO: Go to next scene?
-            print("Goal Reached!");
+            StartCoroutine(PauseBeforeMovingToNextLevel());
         }
         else
         {
             _movementDirection = -_movementDirection;
         }
+    }
+
+    private IEnumerator PauseBeforeMovingToNextLevel()
+    {
+
+        yield return new WaitForSeconds(3);
+        MoveToNextLevel();
+    }
+
+    public void MoveToNextLevel()
+    {
+        SceneManager.LoadScene("Level2", LoadSceneMode.Single);
     }
 
     public void PlaceInOriginalPosition()
